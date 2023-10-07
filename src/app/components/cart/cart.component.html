@@ -1,0 +1,46 @@
+<section class=" rounded shadow w-75 mx-auto bg-light-main p-5 mt-5" *ngIf="cartData.products.length">
+  <div class="d-flex justify-content-between">
+    <div>
+      <h1>Shop Cart</h1>
+      <p class="text-main">Total Cart Price : {{cartData.totalCartPrice}}</p>
+      <button class="btn btn-outline-danger" (click)="clearCart()" [routerLink]="['/home']">Clear Cart</button>
+    </div>
+    <div>
+      <p class="text-main-total">total number of items: <span class="text-main">{{totalItemsCart}}</span></p>
+    </div>
+  </div>
+  <div class="row border-bottom py-3" *ngFor="let item of cartData.products">
+    <div class="col-md-2">
+      <img [src]="item.product?.imageCover" [alt]="item.product?.title" class="w-100">
+    </div>
+    <div class="col-md-10 d-flex justify-content-between align-items-center">
+      <div>
+        <h3 class="h6">{{item.product?.title}}</h3>
+        <p class="text-main">Price: {{item.price}}</p>
+
+        <button (click)="removeItem(item.product?._id)" class="btn btn-outline-danger mt-5"><i
+            class="fas fa-trash mx-1"></i>Remove</button>
+      </div>
+      <div>
+        <button class="btn border-success" (click)="changeCount(item.count + 1 , item.product?._id)">+</button>
+        <span class="m-2">{{item.count}}</span>
+        <button class="btn border-success" (click)="changeCount(item.count - 1,item.product?._id)">-</button>
+      </div>
+    </div>
+  </div>
+
+  <button [routerLink]="['/payment',cartData._id]" class="main-btn">Online Payment <img
+      src="../../../assets/images/visa-1.svg" alt=""></button>
+</section>
+
+
+<section class=" rounded shadow w-75 mx-auto bg-light-main p-5 mt-5" *ngIf="!cartData.products.length">
+  <h1>Cart Shop</h1>
+  <h1>your cart is empty</h1>
+</section>
+
+<section [ngClass]="{'appear': true, 'd-none': appear === 0}"
+  class="rounded shadow w-75 mx-auto bg-light-main p-5 mt-5">
+  <h1>Cart Shop</h1>
+  <h1>your cart is empty</h1>
+</section>

@@ -1,0 +1,94 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap");
+$main-color: #0aad0a;
+$light-color: #f0f3f2;
+$shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px,
+  rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
+  rgba(145, 158, 171, 0.12) 0px 1px 10px 0px;
+$font-family: "Encode Sans Expanded", sans-serif;
+$rating-color: #ffc908;
+$main-transition: 0.8s;
+
+
+body {
+  font-family: $font-family;
+}
+
+.rating-color {
+  color: $rating-color;
+}
+
+.text-main {
+  color:$main-color;
+}
+
+.bg-light-main {
+  background-color: $light-color;
+}
+
+.font-sm {
+  font-size: 12px;
+}
+
+.active-link {
+  background-color: $main-color;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.main-btn {
+  border: unset;
+  background-color: $main-color ;
+  color: #fff ;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 5px;
+
+  &:disabled {
+    background-color: #fff ;
+    color: #000 ;
+    cursor: not-allowed;
+    border:#000 1px solid;
+  }
+}
+
+
+.text-main-total {
+  // color:$main-color;
+  font-weight: 700;
+  font-size:20px;
+}
+
+
+
+
+
+// ^==============^
+
+
+::-webkit-scrollbar
+{
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: $light-color;
+
+}
+
+::-webkit-scrollbar-thumb {
+
+  background-color: $main-color ;
+}
+
+
+
+.heart {
+  font-size: 30px;
+  margin-block: 5px;
+  cursor: pointer;
+}
+
+.redColor {
+  color: red;
+}

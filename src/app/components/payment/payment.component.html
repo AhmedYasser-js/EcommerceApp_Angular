@@ -1,0 +1,42 @@
+<form [formGroup]="checkForm" (ngSubmit)="handleForm()" class=" rounded shadow w-75 mx-auto bg-light-main p-5 mt-5">
+
+  <div class="form-item">
+    <label for="details">details</label>
+    <input type="text" class=" form-control" id="details" formControlName="details">
+    <div class=" alert alert-danger"
+      *ngIf="checkForm.get('details')?.errors && (checkForm.get('details')?.touched || checkForm.get('details')?.value.length > 0)">
+      <p *ngIf="checkForm.get('details')?.getError('required')">details is rquired</p>
+      <p *ngIf="checkForm.get('details')?.getError('minlength')">details minLength 3</p>
+      <p *ngIf="checkForm.get('details')?.getError('maxlength')">details maxLength 20</p>
+    </div>
+  </div>
+
+  <div class="form-item">
+    <label for="phone">phone</label>
+    <input type="tel" class=" form-control" id="phone" formControlName="phone">
+    <div class="alert alert-danger"
+      *ngIf="checkForm.get('phone')?.errors && (checkForm.get('phone')?.touched || checkForm.get('phone')?.value.length > 0)">
+      <p *ngIf="checkForm.get('phone')?.getError('required')">phone is required</p>
+      <p *ngIf="checkForm.get('phone')?.getError('pattern')">phone confirmation is incorrect</p>
+
+    </div>
+  </div>
+
+  <div class="form-item">
+    <label for="city">city</label>
+    <input type="text" class=" form-control" id="city" formControlName="city">
+    <div class="alert alert-danger"
+      *ngIf="checkForm.get('city')?.errors && (checkForm.get('city')?.touched || checkForm.get('city')?.value.length > 0)">
+      <p *ngIf="checkForm.get('city')?.getError('required')">city is required</p>
+      <p *ngIf="checkForm.get('city')?.getError('minlength')">city minLength 3</p>
+      <p *ngIf="checkForm.get('city')?.getError('maxlength')">city maxLength 20</p>
+
+    </div>
+  </div>
+
+
+  <button class="btn main-btn">CheckOut</button>
+
+
+
+</form>

@@ -1,0 +1,74 @@
+<section>
+  <div class="row g-0">
+    <div class="col-md-8">
+
+      <owl-carousel-o [options]="mainSlider">
+        <ng-template carouselSlide>
+          <img height="400" class="w-100" src="./assets/images/main-slider-1.jpeg" alt="">
+        </ng-template>
+        <ng-template carouselSlide>
+          <img height="400" class="w-100" src="./assets/images/main-slider-2.jpeg" alt="">
+        </ng-template>
+        <ng-template carouselSlide>
+          <img height="400" class="w-100" src="./assets/images/main-slider-3.jpeg" alt="">
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+    <div class="col-md-4">
+      <img height="200" class="w-100" src="./assets/images/slide-1.jpeg" alt="">
+      <img height="200" class="w-100" src="./assets/images/slide-2.jpeg" alt="">
+
+    </div>
+  </div>
+</section>
+<section>
+  <h1>Shop Categories</h1>
+  <owl-carousel-o [options]="catOptions">
+
+    <ng-container *ngFor="let item of categoriesData">
+      <ng-template carouselSlide>
+        <img [src]="item.image" [alt]="item.name" [title]="item.name" height="210" class=" object-fit-cover">
+        <h3 class="h6 text-main">{{item.name}}</h3>
+      </ng-template>
+    </ng-container>
+
+  </owl-carousel-o>
+</section>
+
+
+
+<section class=" mb-5">
+  <h1>Popular Products</h1>
+  <input type="text" class="form-control w-50 mx-auto form-control-sm my-3" placeholder="Search..." [(ngModel)]="term">
+
+  <div class="row g-4 justify-content-center">
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3" *ngFor="let item of productsData |search : term| slice:0:18">
+      <div class="card p-2">
+        <div role="button" [routerLink]="['/details', item._id]">
+          <img [src]="item.imageCover" alt="" class="w-100">
+          <div class="product-details">
+            <h4 class="text-main h6">{{item.category.name}}</h4>
+            <h4 class="h6">{{item.title|cutText}}</h4>
+            <div class=" d-flex justify-content-between align-items-center">
+              <span>{{item.price | currency:"EGP"}}</span>
+              <span><i [class.rating-color]="roundNumber(item.ratingsAverage) >= num" *ngFor="let num of [1,2,3,4,5]"
+                  class="fas fa-star "></i> {{item.ratingsAverage}}</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="heart d-flex justify-content-center align-items-center">
+          <i *ngIf="!wishListData.includes($any(item._id))" class="fa-solid fa-heart" role="button"
+            (click)="addToWish(item._id)"></i>
+          <i *ngIf="wishListData.includes($any(item._id))" class="fa-solid fa-heart redColor" role="button"
+            (click)="removFromWishList(item._id)"></i>
+
+
+        </div>
+        <div>
+          <button class="btn main-btn w-100" (click)="addProduct(item._id)">+Add To Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

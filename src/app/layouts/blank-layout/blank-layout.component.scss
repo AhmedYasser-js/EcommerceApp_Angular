@@ -1,0 +1,23 @@
+$main-color: #0aad0a;
+
+.btn-up {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: $main-color;
+  color: #fff;
+  cursor: pointer;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 99;
+  width: 40px;
+  height: 40px;
+border: none;
+}
+
+.btn-up:hover {
+  background-color: #48bc48; /* Background color on hover */
+}
+

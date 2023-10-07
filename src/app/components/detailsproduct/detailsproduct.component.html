@@ -1,0 +1,32 @@
+<section>
+  <div class="row align-items-center g-4">
+    <div class="col-md-3">
+
+      <owl-carousel-o [options]="productSlider">
+
+        <ng-container *ngFor="let path of productDetails.images">
+          <ng-template carouselSlide>
+            <img [src]="path">
+          </ng-template>
+        </ng-container>
+
+      </owl-carousel-o>
+
+
+    </div>
+    <div class="col-md-9">
+      <h3>{{productDetails.title}}</h3>
+      <p>{{productDetails.description}}</p>
+      <p>{{productDetails.price | currency:"EGP"}}</p>
+      <p>{{productDetails.ratingsAverage}}</p>
+      <span><i [class.rating-color]="roundNumber(productDetails.ratingsAverage) >= num" *ngFor="let num of [1,2,3,4,5]"
+          class="fas fa-star "></i>
+        {{productDetails.ratingsAverage}}</span>
+      <div class="heart d-flex justify-content-center align-items-center">
+        <i class="fa-solid fa-heart" role="button" (click)="addToWish(productDetails.id)"></i>
+      </div>
+      <button class="main-btn w-100" (click)="addProduct(productDetails.id)">+Add To Cart</button>
+    </div>
+  </div>
+</section>
+<!-- addToWish -->
