@@ -28,9 +28,16 @@
             </div>
           </div>
         </div>
+
+
         <div class="heart d-flex justify-content-center align-items-center">
-          <i class="fa-solid fa-heart" role="button" (click)="addToWish(item._id)"></i>
+          <i *ngIf="!wishListData.includes($any(item._id))" class="fa-solid fa-heart" role="button"
+            (click)="addToWish(item._id)"></i>
+          <i *ngIf="wishListData.includes($any(item._id))" class="fa-solid fa-heart redColor" role="button"
+            (click)="removFromWishList(item._id)"></i>
         </div>
+
+
         <div>
           <button class="btn main-btn w-100" (click)="addProduct(item._id)">+Add To Cart</button>
         </div>

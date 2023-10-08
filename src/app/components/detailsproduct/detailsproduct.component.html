@@ -22,9 +22,15 @@
       <span><i [class.rating-color]="roundNumber(productDetails.ratingsAverage) >= num" *ngFor="let num of [1,2,3,4,5]"
           class="fas fa-star "></i>
         {{productDetails.ratingsAverage}}</span>
+
       <div class="heart d-flex justify-content-center align-items-center">
-        <i class="fa-solid fa-heart" role="button" (click)="addToWish(productDetails.id)"></i>
+        <i *ngIf="!wishListData.includes($any(productDetails._id))" class="fa-solid fa-heart" role="button"
+          (click)="addToWish(productDetails._id)"></i>
+        <i *ngIf="wishListData.includes($any(productDetails._id))" class="fa-solid fa-heart redColor" role="button"
+          (click)="removFromWishList(productDetails._id)"></i>
       </div>
+
+
       <button class="main-btn w-100" (click)="addProduct(productDetails.id)">+Add To Cart</button>
     </div>
   </div>

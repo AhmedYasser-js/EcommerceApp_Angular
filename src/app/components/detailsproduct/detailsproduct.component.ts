@@ -21,6 +21,8 @@ export class DetailsproductComponent implements OnInit {
   productDetails: any = {}
   productId: any;
   // total: number = 0;
+  wishListData: any[] = [];
+
 
 
   ngOnInit(): void {
@@ -37,6 +39,15 @@ export class DetailsproductComponent implements OnInit {
       }
     })
 
+    this._WishListService.getToWishList().subscribe({
+      next: (response) => {
+        console.log(response)
+
+        const newWishData = response.data.map((item: any) => item._id)
+        console.log(newWishData);
+        this.wishListData = newWishData;
+      }
+    })
 
 
   }
@@ -79,14 +90,37 @@ export class DetailsproductComponent implements OnInit {
   }
 
 
-  addToWish(id: string): void {
+  addToWish(id: any): void {
     this._WishListService.addToWishList(id).subscribe({
       next: (response) => {
         console.log(response)
-
         this._ToastrService.success(response.message + ' ❤️');
+        if (response.status == "success") {
+          // this.isSelectedHeart(id)
+          const newWishData = response.data.map((item: any) => item._id)
+          console.log(newWishData);
+          this.wishListData = response.data;
+        }
       }
     });
   }
+
+
+  removFromWishList(id: string): void {
+    this._WishListService.removeItemFromWishList(id,).subscribe({
+      next: (response) => {
+        console.log(response)
+        // this.wishListData.splice(i, 1)
+        // this.wishListData = response.data;
+        // console.log(this.wishListData)
+        this._ToastrService.success(response.message);
+        const newWishData = response.data.map((item: any) => item._id)
+        console.log(newWishData);
+        this.wishListData = response.data;
+
+      }
+    })
+  }
+
 
 }

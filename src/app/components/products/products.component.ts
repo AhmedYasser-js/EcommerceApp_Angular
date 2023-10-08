@@ -15,6 +15,7 @@ export class ProductsComponent implements OnInit {
   currentPage: number = 1;
   total: number = 0;
   term: string = '';
+  wishListData: any[] = [];
 
   constructor(
     private _ApidataService: ApidataService,
@@ -33,6 +34,20 @@ export class ProductsComponent implements OnInit {
         this.total = response.results
       }
     });
+
+    this._WishListService.getToWishList().subscribe({
+      next: (response) => {
+        console.log(response)
+
+        const newWishData = response.data.map((item: any) => item._id)
+        console.log(newWishData);
+        this.wishListData = newWishData;
+      }
+    })
+
+
+
+
   }
 
 
@@ -70,15 +85,49 @@ export class ProductsComponent implements OnInit {
 
 
 
-  addToWish(id: string): void {
+  // addToWish(id: string): void {
+  //   this._WishListService.addToWishList(id).subscribe({
+  //     next: (response) => {
+  //       console.log(response)
+  //       // this._WishListService.cartNum.next(response.numOfCartItems);
+  //       // console.log(this._WishListService.cartNum);
+  //       this._ToastrService.success(response.message + ' ❤️');
+  //     }
+  //   });
+  // }
+
+
+
+  addToWish(id: any): void {
     this._WishListService.addToWishList(id).subscribe({
       next: (response) => {
         console.log(response)
-        // this._WishListService.cartNum.next(response.numOfCartItems);
-        // console.log(this._WishListService.cartNum);
         this._ToastrService.success(response.message + ' ❤️');
+        if (response.status == "success") {
+          // this.isSelectedHeart(id)
+          const newWishData = response.data.map((item: any) => item._id)
+          console.log(newWishData);
+          this.wishListData = response.data;
+        }
       }
     });
+  }
+
+
+  removFromWishList(id: string): void {
+    this._WishListService.removeItemFromWishList(id,).subscribe({
+      next: (response) => {
+        console.log(response)
+        // this.wishListData.splice(i, 1)
+        // this.wishListData = response.data;
+        // console.log(this.wishListData)
+        this._ToastrService.success(response.message);
+        const newWishData = response.data.map((item: any) => item._id)
+        console.log(newWishData);
+        this.wishListData = response.data;
+
+      }
+    })
   }
 
 
